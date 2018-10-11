@@ -33,9 +33,9 @@ class App extends Component {
     this.setState({ name: "", email: "", phone: "" });
   }
 
-  removeItem(itemId) {
-    const list = firebase.database().ref(`/contacts/${itemId}`);
-    list.remove();
+  removeItem(id) {
+    const ref = firebase.database().ref(`/Contacts/${id}`);
+    ref.remove();
   }
 
   componentDidMount() {
@@ -101,8 +101,12 @@ class App extends Component {
                       <h3>{contact.name}</h3>
                       <p>Email: {contact.email}</p>
                       <p>Phone: {contact.phone}</p>
-                      <button onClick={() => this.removeItem(contact.id)}>
-                        Remove Item
+                      <button
+                        onClick={() => {
+                          this.removeItem(contact.id);
+                        }}
+                      >
+                        Delete Contact
                       </button>
                     </li>
                   );
